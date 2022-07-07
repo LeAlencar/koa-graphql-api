@@ -21,23 +21,19 @@ const mutation = mutationWithClientMutationId({
     name: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    start: {
+    category: {
       type: new GraphQLNonNull(GraphQLString),
     },
-    end: {
+    price: {
       type: new GraphQLNonNull(GraphQLString),
-    },
-    allDay: {
-      type: new GraphQLNonNull(GraphQLBoolean),
-    },
+    }
   },
-  mutateAndGetPayload: async ({ transactionId, name, start, end, allDay }) => {
+  mutateAndGetPayload: async ({ transactionId, name, category, price }) => {
     const transaction = await TransactionModel.findById({
       _id: getObjectId(transactionId),
       name,
-      start,
-      end,
-      allDay,
+      category,
+      price
     });
 
     if (!transaction) {
@@ -53,9 +49,8 @@ const mutation = mutationWithClientMutationId({
       {
         $set: {
           name,
-          start,
-          end,
-          allDay,
+          category,
+          price
         },
       },
     );
