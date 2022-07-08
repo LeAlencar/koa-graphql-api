@@ -3,7 +3,7 @@ import { config } from '../config';
 
 export const connectDB = () => {
 
-  mongoose.connect("mongodb+srv://leandro:L34ndro123@cluster0.lozvw.mongodb.net/?retryWrites=true&w=majority");
+  mongoose.connect(config.MONGO_URI);
 
   const db = mongoose.connection;
   db.on("error", console.error.bind(console, "connection error:"));
